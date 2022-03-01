@@ -1,10 +1,8 @@
-from django.core.files.storage import FileSystemStorage
 from django.db import models
 
 from generalizing_core.models.relation import Relation
 from generalizing_core.models.mixins.identity_mixin import IdentityMixin
 
-fs = FileSystemStorage(location='/media/relations') #TODO donde se guarda estooooo
 
 class RelationFile(IdentityMixin):
 
@@ -15,7 +13,7 @@ class RelationFile(IdentityMixin):
     )
 
     _file = models.FileField(
-        storage=fs,
+         upload_to='relation/',
         db_column='file',
         verbose_name='File'
     )
