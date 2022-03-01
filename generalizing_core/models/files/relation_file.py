@@ -1,7 +1,7 @@
 from django.core.files.storage import FileSystemStorage
 from django.db import models
 
-from generalizing_core.models.lesson import Lesson
+from generalizing_core.models.relation import Relation
 from generalizing_core.models.mixins.identity_mixin import IdentityMixin
 
 fs = FileSystemStorage(location='/media/relations') #TODO donde se guarda estooooo
@@ -9,7 +9,7 @@ fs = FileSystemStorage(location='/media/relations') #TODO donde se guarda estooo
 class RelationFile(IdentityMixin):
 
     _relation = models.ForeignKey(
-        Lesson,
+        Relation,
         db_column='relation',
         verbose_name='Relation'
     )
