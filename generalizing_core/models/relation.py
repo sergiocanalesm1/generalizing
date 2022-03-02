@@ -12,7 +12,8 @@ class Relation(IdentityMixin,DatesMixin):
     _user = models.ForeignKey(
         User,
         db_column='user',
-        verbose_name='User'
+        verbose_name='User',
+        on_delete=models.PROTECT
     )
 
     _lessons = models.ManyToManyField(
@@ -29,6 +30,7 @@ class Relation(IdentityMixin,DatesMixin):
     )
 
     _type = models.CharField(
+        max_length=50,
         db_column='domain',
         verbose_name='Domain',
         blank=True,
@@ -39,7 +41,10 @@ class Relation(IdentityMixin,DatesMixin):
     _challenge = models.ForeignKey(
         Challenge,
         db_column='challenge',
-        verbose_name='Challenge'
+        verbose_name='Challenge',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
     )
 
     class Meta:

@@ -21,26 +21,26 @@ class RelationContext(IdentityMixin):
         verbose_name='Day Dreamed'
     )
 
+    #TODO business rule to accept below 50
     _past_week_sleep_hrs = models.IntegerField(
-        max_length=40,
         db_column='past_week_sleep_hours',
         verbose_name='Past Week Sleep Hours'
     )
 
+    #TODO business rule to accept from 1-5
     _mood = models.IntegerField(
-        max_length=5,
         db_column='mood',
         verbose_name='Mood'
     )
 
+    #TODO business rule to accept from 1-5
     _relaxation = models.IntegerField(
-        max_length=5,
         db_column='relaxation',
         verbose_name='Relaxation'
     )
 
+    #TODO business rule to accept below 50
     _iterations = models.IntegerField(
-        max_length=100,
         db_column='iterations',
         verbose_name='Iterations'
     )

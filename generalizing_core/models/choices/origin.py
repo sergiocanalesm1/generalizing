@@ -13,3 +13,4 @@ class Origin(models.TextChoices):
     RELATION = 'Relation'
     LESSON = 'Lesson'
     INTERPRETATION = 'Interpretation'
+    OTHER= 'Other'

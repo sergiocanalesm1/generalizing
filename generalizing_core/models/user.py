@@ -6,6 +6,7 @@ from generalizing_core.models.mixins.identity_mixin import IdentityMixin
 from generalizing_core.models.mixins.dates_mixin import DatesMixin
 
 class User(IdentityMixin,DatesMixin):
+    
     _name = models.CharField(
         db_column='name',
         verbose_name='Name',
@@ -16,7 +17,7 @@ class User(IdentityMixin,DatesMixin):
 
     _password = models.CharField(
         verbose_name='Password',
-        max_length=30,
+        max_length=240,
         null=True,
         blank=True
     )
@@ -24,8 +25,6 @@ class User(IdentityMixin,DatesMixin):
     email = models.EmailField(
         db_column = 'email',
         verbose_name='Email Address',
-        null=False,
-        blank=False,
         unique=True
     )
 

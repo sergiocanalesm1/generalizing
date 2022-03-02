@@ -7,7 +7,7 @@ class Tag(IdentityMixin):
     _tag = models.CharField(
         db_column='tag',
         verbose_name='Tags',
-        max_length=30
+        max_length=50
     )
 
     class Meta:

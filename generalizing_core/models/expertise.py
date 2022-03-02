@@ -6,7 +6,8 @@ from generalizing_core.models.user import User
 
 class Expertise(IdentityMixin):
     
-    _area = models.ForeignKey(
+    _area = models.CharField(
+        max_length=100,
         db_column='domain',
         verbose_name='Domain',
         blank=True,

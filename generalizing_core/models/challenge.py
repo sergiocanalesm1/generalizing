@@ -15,13 +15,17 @@ class Challenge(IdentityMixin,DatesMixin):
     _lesson_1 = models.ForeignKey(
         Lesson,
         db_column='lesson_1',
-        verbose_name='Lesson 1'
+        verbose_name='Lesson 1',
+        on_delete=models.PROTECT,
+        related_name='lesson_1'
     )
 
     _lesson_2 = models.ForeignKey(
         Lesson,
         db_column='lesson_2',
-        verbose_name='Lesson 2'
+        verbose_name='Lesson 2',
+        on_delete=models.PROTECT,
+        related_name='lesson_2'
     )
 
     class Meta:

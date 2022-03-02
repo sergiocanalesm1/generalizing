@@ -13,10 +13,9 @@ fs = FileSystemStorage(location='/media/lessons')
 class Lesson(IdentityMixin,DatesMixin):
 
     _name = models.CharField(
+        max_length=100,
         db_column='name',
         verbose_name='Name',
-        blank=False,
-        null=False
     )
 
     _description = models.TextField(
@@ -27,14 +26,14 @@ class Lesson(IdentityMixin,DatesMixin):
     )
 
     _origin = models.CharField(
+        max_length=100,
         db_column='origin',
         verbose_name='Origin',
-        blank=False,
-        null=False,
         choices=Origin.choices
     )
 
-    _domain = models.ForeignKey(
+    _domain = models.CharField(
+        max_length=100,
         db_column='domain',
         verbose_name='Domain',
         blank=True,
@@ -47,13 +46,13 @@ class Lesson(IdentityMixin,DatesMixin):
         db_column='tag',
         verbose_name='Tags',
         blank=True,
-        null=True
     )
 
     _user = models.ForeignKey(
         User,
         db_column='user',
-        verbose_name='User'
+        verbose_name='User',
+        on_delete=models.PROTECT
     )
 
     class Meta:

@@ -23,3 +23,4 @@ class Domain(models.TextChoices):
     ANTHROPOLOGY = 'Anthropology'
     MEDICINE  = 'Medicine'
     EDUCATION = 'Education'
+    OTHER = 'Other'
