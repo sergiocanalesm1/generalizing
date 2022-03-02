@@ -6,25 +6,22 @@ from generalizing_core.models.user import User
 
 class Expertise(IdentityMixin):
     
-    _area = models.CharField(
+    area = models.CharField(
         max_length=100,
-        db_column='domain',
         verbose_name='Domain',
         blank=True,
         null=True,
         choices=Domain.choices
     )
 
-    _description = models.TextField(
-        db_column='description',
+    description = models.TextField(
         verbose_name='Description',
         blank=True,
         null=True
     )
 
-    _user = models.ForeignKey( 
+    user = models.ForeignKey( 
         User,
-        db_column='user',
         verbose_name='User',
         on_delete=models.CASCADE
     )

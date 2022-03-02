@@ -3,44 +3,41 @@ from django.db import models
 from generalizing_core.models.lesson import Lesson
 from generalizing_core.models.user import User
 from generalizing_core.models.mixins.identity_mixin import IdentityMixin
-from generalizing_core.models.mixins.dates_mixin import DatesMixin
 from generalizing_core.models.choices.type import Type
 from generalizing_core.models.challenge import Challenge
 
-class Relation(IdentityMixin,DatesMixin):
+class Relation(IdentityMixin):
 
-    _user = models.ForeignKey(
+    user = models.ForeignKey(
         User,
-        db_column='user',
         verbose_name='User',
         on_delete=models.PROTECT
     )
 
-    _lessons = models.ManyToManyField(
+    creation_date = models.DateTimeField(
+        verbose_name='Creation Date',
+        auto_now_add=True
+    )
+
+    lessons = models.ManyToManyField(
         Lesson,
-        db_column='lesson',
         verbose_name='Lessons',
     )
 
-    _explanation = models.TextField(
-        db_column='explanation',
+    explanation = models.TextField(
         verbose_name='Explanation',
-        blank=False,
-        null=False
     )
 
-    _type = models.CharField(
+    type = models.CharField(
         max_length=50,
-        db_column='domain',
-        verbose_name='Domain',
+        verbose_name='Type',
         blank=True,
         null=True,
         choices=Type.choices
     )
 
-    _challenge = models.ForeignKey(
+    challenge = models.ForeignKey(
         Challenge,
-        db_column='challenge',
         verbose_name='Challenge',
         null=True,
         blank=True,

@@ -1,31 +1,27 @@
-from statistics import mode
-from tabnanny import verbose
 from django.db import models
 
 from generalizing_core.models.mixins.identity_mixin import IdentityMixin
-from generalizing_core.models.mixins.dates_mixin import DatesMixin
 
-class User(IdentityMixin,DatesMixin):
+class User(IdentityMixin):
     
-    _name = models.CharField(
-        db_column='name',
-        verbose_name='Name',
+    username = models.CharField(
+        verbose_name='Username',
         max_length=30,
-        null=True,
-        blank=True
     )
 
-    _password = models.CharField(
+    password = models.CharField(
         verbose_name='Password',
         max_length=240,
-        null=True,
-        blank=True
     )
 
     email = models.EmailField(
-        db_column = 'email',
         verbose_name='Email Address',
         unique=True
+    )
+
+    creation_date = models.DateTimeField(
+        verbose_name='Creation Date',
+        auto_now_add=True
     )
 
     class Meta:

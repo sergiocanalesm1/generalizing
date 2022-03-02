@@ -5,44 +5,51 @@ from generalizing_core.models.mixins.identity_mixin import IdentityMixin
 
 class RelationContext(IdentityMixin):
 
-    _place = models.CharField(
-        db_column='place',
+    place = models.CharField(
         verbose_name='Place',
-        max_length=240
+        max_length=240,
+        blank=True,
+        null=True,
     )
 
-    _dialogued = models.BooleanField(
-        db_column='dialogued',
-        verbose_name='Dialogued'
+    dialogued = models.BooleanField(
+        verbose_name='Dialogued',
+        blank=True,
+        null=True,
     )
 
-    _daydreamed = models.BooleanField(
-        db_column='daydreamed',
-        verbose_name='Day Dreamed'
-    )
-
-    #TODO business rule to accept below 50
-    _past_week_sleep_hrs = models.IntegerField(
-        db_column='past_week_sleep_hours',
-        verbose_name='Past Week Sleep Hours'
-    )
-
-    #TODO business rule to accept from 1-5
-    _mood = models.IntegerField(
-        db_column='mood',
-        verbose_name='Mood'
-    )
-
-    #TODO business rule to accept from 1-5
-    _relaxation = models.IntegerField(
-        db_column='relaxation',
-        verbose_name='Relaxation'
+    daydreamed = models.BooleanField(
+        verbose_name='Day Dreamed',
+        blank=True,
+        null=True,
     )
 
     #TODO business rule to accept below 50
-    _iterations = models.IntegerField(
-        db_column='iterations',
-        verbose_name='Iterations'
+    past_week_sleep_hrs = models.IntegerField(
+        verbose_name='Past Week Sleep Hours',
+        blank=True,
+        null=True,
+    )
+
+    #TODO business rule to accept from 1-5
+    mood = models.IntegerField(
+        verbose_name='Mood',
+        blank=True,
+        null=True,
+    )
+
+    #TODO business rule to accept from 1-5
+    relaxation = models.IntegerField(
+        verbose_name='Relaxation',
+        blank=True,
+        null=True,
+    )
+
+    #TODO business rule to accept below 50
+    iterations = models.IntegerField(
+        verbose_name='Iterations',
+        blank=True,
+        null=True,
     )
 
     class Meta:

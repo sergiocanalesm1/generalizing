@@ -4,8 +4,7 @@ from generalizing_core.models.mixins.identity_mixin import  IdentityMixin
 
 class Tag(IdentityMixin):
     
-    _tag = models.CharField(
-        db_column='tag',
+    tag = models.CharField(
         verbose_name='Tags',
         max_length=50
     )
