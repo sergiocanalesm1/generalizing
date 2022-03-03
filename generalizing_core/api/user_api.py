@@ -10,7 +10,7 @@ class UserList(APIView):
     def post(self,request,*args,**kwargs):
 
         user = UserSerializer(data=request.data)
-    
+        #TODO encrypt?
         if user.is_valid():
             user.save()
             return Response(user.data)

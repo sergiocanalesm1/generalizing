@@ -11,7 +11,7 @@ fs = FileSystemStorage(location='/media/lessons')
 
 class Lesson(IdentityMixin):
 
-    name = models.CharField(
+    name = models.CharField(#TODO ponerle más
         max_length=100,
         verbose_name='Name',
     )
