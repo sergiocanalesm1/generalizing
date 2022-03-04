@@ -5,6 +5,12 @@ from generalizing_core.models.mixins.identity_mixin import IdentityMixin
 
 class RelationContext(IdentityMixin):
 
+    description = models.TextField(
+        verbose_name='Description',
+        blank=True,
+        null=True
+    )
+
     place = models.CharField(
         verbose_name='Place',
         max_length=240,
@@ -24,28 +30,28 @@ class RelationContext(IdentityMixin):
         null=True,
     )
 
-    #TODO business rule to accept below 50
-    past_week_sleep_hrs = models.IntegerField(
+    past_week_sleep_hrs = models.CharField(
+        max_length=50,
         verbose_name='Past Week Sleep Hours',
-        blank=True,
         null=True,
+        blank=True,
     )
 
-    #TODO business rule to accept from 1-5
-    mood = models.IntegerField(
+    mood = models.CharField(
+        max_length=50,
         verbose_name='Mood',
-        blank=True,
         null=True,
+        blank=True,
     )
 
-    #TODO business rule to accept from 1-5
-    relaxation = models.IntegerField(
+    relaxation = models.CharField(
+        max_length=50,
         verbose_name='Relaxation',
-        blank=True,
         null=True,
+        blank=True,
     )
 
-    #TODO business rule to accept below 50
+
     iterations = models.IntegerField(
         verbose_name='Iterations',
         blank=True,

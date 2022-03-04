@@ -6,11 +6,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = (
-            'uuid',
+        fields = [
             'id',
             'username',
+            'uuid',
             'email',
-            'password',
-            'creation_date'
-        )
+            'birth_date',
+            'gender',
+            'workspace',
+            'city_population',
+            'average_weekly_sleep_hrs',
+            'creation_date',
+        ]

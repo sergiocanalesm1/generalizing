@@ -1,30 +1,20 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
+from django.contrib.auth.hashers import make_password
+
+from rest_framework.decorators import api_view
 
 from generalizing_core.serializers.user_serializer import UserSerializer
 from generalizing_core.models.user import User
-  
-class UserList(APIView):
+from generalizing_core.api.common.protocols import detail,list
 
-    def post(self,request,*args,**kwargs):
-
-        user = UserSerializer(data=request.data)
-        #TODO encrypt?
-        if user.is_valid():
-            user.save()
-            return Response(user.data)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+@api_view(['GET', 'POST'])
+def user_list(request):
+    if request.data and request.data['password']:
+        request.data['password'] = make_password(request.data['password'])
+    return list(request,User,UserSerializer)
 
 
-    def get(self,request,*args,**kwargs):
-    
-
-        users = User.objects.all()
-    
-        if users:
-            data = UserSerializer(users,many=True).data
-            return Response(data)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+@api_view(['GET', 'PUT', 'DELETE'])
+def user_detail(request, uuid):
+    if request.data and request.data['password']:
+        request.data['password'] = make_password(request.data['password'])
+    return detail(request,uuid,User,UserSerializer)

@@ -1,30 +1,41 @@
+from django.shortcuts import get_object_or_404
+
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.decorators import api_view
 
 from generalizing_core.serializers.lesson_serializer import LessonSerializer
 from generalizing_core.models.lesson import Lesson
-  
-class LessonList(APIView):
+from generalizing_core.models.user import User
+from generalizing_core.models.tag import Tag
+from generalizing_core.api.common.protocols import detail,list
 
-    def post(self,request,*args,**kwargs):
+def handle_tags(tags):
 
-        lesson = LessonSerializer(data=request.data)
-        print(request.data)
+    real_tags = [t.lower() for t in tags]
+    for tag in real_tags:
+        if not Tag.objects.filter(pk=tag).exists():
+            new_tag = Tag(pk=tag)
+            new_tag.save()
+    print(real_tags)
+    return real_tags
 
-        if lesson.is_valid():
-            lesson.save()
-            return Response(lesson.data)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+@api_view(['GET', 'POST'])
+def lesson_list(request):
+    if request.data and request.data['tags']:
+        request.data['tags'] = handle_tags(request.data['tags'])
+    return list(request,Lesson,LessonSerializer)
 
 
-    def get(self,request,*args,**kwargs):
+@api_view(['GET', 'PUT', 'DELETE'])
+def lesson_detail(request, uuid):
+    if request.data and request.data['tags']:
+        request.data['tags'] = handle_tags(request.data['tags'])
+    return detail(request,uuid,Lesson,LessonSerializer)
 
-        lessons = Lesson.objects.all()
-    
-        if lessons:
-            data = LessonSerializer(lessons,many=True).data
-            return Response(data)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+@api_view(['GET'])
+def lesson_user_list(request, uuid):
+    pk = get_object_or_404(User, uuid=uuid).pk
+    list = Lesson.objects.filter(user_id = pk)
+    serializer = LessonSerializer(list, many=True,context={'request':request})
+    return Response(serializer.data)

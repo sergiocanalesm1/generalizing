@@ -1,10 +1,9 @@
 from django.db import models
 
-from generalizing_core.models.mixins.identity_mixin import  IdentityMixin
-
-class Tag(IdentityMixin):
+class Tag(models.Model):
     
     tag = models.CharField(
+        primary_key=True,
         verbose_name='Tags',
         max_length=50
     )

@@ -8,6 +8,12 @@ from generalizing_core.models.challenge import Challenge
 
 class Relation(IdentityMixin):
 
+    name = models.CharField(
+        max_length=100,
+        verbose_name='Name',
+        null=True,#TODO remove with new database
+    )
+
     user = models.ForeignKey(
         User,
         verbose_name='User',

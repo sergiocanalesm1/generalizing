@@ -11,8 +11,8 @@ fs = FileSystemStorage(location='/media/lessons')
 
 class Lesson(IdentityMixin):
 
-    name = models.CharField(#TODO ponerle más
-        max_length=100,
+    name = models.CharField(#TODO delete database and re run migrations
+        max_length=200,
         verbose_name='Name',
     )
 
@@ -41,11 +41,13 @@ class Lesson(IdentityMixin):
         choices=Domain.choices
     )
 
+
     tags = models.ManyToManyField(
         Tag,
         verbose_name='Tags',
         blank=True,
     )
+
 
     user = models.ForeignKey(
         User,

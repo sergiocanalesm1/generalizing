@@ -6,11 +6,6 @@ from generalizing_core.models.mixins.identity_mixin import IdentityMixin
 
 class Challenge(IdentityMixin):
 
-    user = models.ManyToManyField(
-        User,
-        verbose_name='User'
-    )
-
     creation_date = models.DateTimeField(
         verbose_name='Creation Date',
         auto_now_add=True
