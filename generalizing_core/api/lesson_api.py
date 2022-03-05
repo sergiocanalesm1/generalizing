@@ -11,7 +11,6 @@ from generalizing_core.models.tag import Tag
 from generalizing_core.api.common.protocols import detail,list
 
 def handle_tags(tags):
-
     real_tags = [t.lower() for t in tags]
     for tag in real_tags:
         if not Tag.objects.filter(pk=tag).exists():
@@ -22,14 +21,14 @@ def handle_tags(tags):
 
 @api_view(['GET', 'POST'])
 def lesson_list(request):
-    if request.data and request.data['tags']:
+    if request.data and 'tags' in request.data:
         request.data['tags'] = handle_tags(request.data['tags'])
     return list(request,Lesson,LessonSerializer)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def lesson_detail(request, uuid):
-    if request.data and request.data['tags']:
+    if request.data and 'tags' in request.data:
         request.data['tags'] = handle_tags(request.data['tags'])
     return detail(request,uuid,Lesson,LessonSerializer)
 

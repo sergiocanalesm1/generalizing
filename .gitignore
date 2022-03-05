@@ -58,4 +58,6 @@ target/
 
 venv
 media
+static
+staticfiles
 .env
