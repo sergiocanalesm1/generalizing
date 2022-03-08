@@ -1,0 +1,1 @@
+web: gunicorn generalizing_bo.wsgi
