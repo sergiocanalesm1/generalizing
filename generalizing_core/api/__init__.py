@@ -1,4 +1,4 @@
-from .user_api import user_list, user_detail
+from .user_api import user_list, user_detail, user_login
 from .lesson_api import lesson_list, lesson_detail, lesson_user_list
 from .expertise_api import expertise_list, expertise_detail, expertise_user_list
 from .relation_api import relation_list, relation_detail, relation_user_list

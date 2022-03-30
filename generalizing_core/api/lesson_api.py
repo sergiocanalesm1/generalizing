@@ -16,7 +16,6 @@ def handle_tags(tags):
         if not Tag.objects.filter(pk=tag).exists():
             new_tag = Tag(pk=tag)
             new_tag.save()
-    print(real_tags)
     return real_tags
 
 @api_view(['GET', 'POST'])
