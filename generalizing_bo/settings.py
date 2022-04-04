@@ -61,7 +61,7 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True #fix for prod
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://127.0.0.1', 'http://127.0.0.1','http://localhost:3000']
 
 ROOT_URLCONF = 'generalizing_bo.urls'
 
