@@ -1,11 +1,17 @@
 from django.urls import path
 
+#from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+
 from generalizing_core.api import *
 
 urlpatterns = [
 
-    path('users/', user_list, name='user-list'),#TODO auth
-    path('users/<uuid>', user_detail, name='user-detail'),
+    path('login/', user_login, name='token_obtain_pair'),
+    #path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('users/', user_list, name='user-list'),
+    #path('users/<uuid>', user_detail, name='user-detail'),
 
     path('expertises/', expertise_list, name='expertise_list'),
     path('expertises/<uuid>', expertise_detail, name='expertise_detail'),

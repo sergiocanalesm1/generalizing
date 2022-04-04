@@ -1,19 +1,18 @@
-from functools import partial
 from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
 from rest_framework import status
 
 
-def list(request, model_class, serializer_class):
+def list(request, model_class, serializer_read_class, serializer_write_class ):
 
     if request.method == 'GET':
         list = model_class.objects.all()
-        serializer = serializer_class(list, many=True,context={'request':request})
+        serializer = serializer_read_class(list, many=True,context={'request':request})
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = serializer_class(data=request.data,context={'request':request})
+        serializer = serializer_write_class(data=request.data,context={'request':request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

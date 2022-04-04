@@ -16,6 +16,7 @@ import django_heroku
 import dj_database_url
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') != 'False'
 
-ALLOWED_HOSTS = ['*',]
+
 
 
 # Application definition
@@ -40,22 +41,27 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-
+    #'django.contrib.staticfiles',
     'rest_framework',
+    'storages',
+    'corsheaders',
     'generalizing_core',
-    'storages'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True #fix for prod
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['*']
 
 ROOT_URLCONF = 'generalizing_bo.urls'
 
@@ -75,7 +81,10 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'generalizing_bo.wsgi.application'
+
 
 
 # Database
@@ -144,12 +153,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-
-#if not DEBUG:
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#MEDIA_URL = '/media/'
-
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
