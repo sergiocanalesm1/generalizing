@@ -10,11 +10,10 @@ from generalizing_core.api.common.protocols import detail,list
 
 @api_view(['GET', 'POST'])
 def user_list(request):
-    return list(request,User,UserSerializer)
+    return list(request,User,UserSerializer,UserSerializer)#fix
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-#@permission_classes([IsAuthenticated])
 def user_detail(request, uuid):
     return detail(request,uuid,User,UserSerializer)
 
