@@ -4,7 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-def list(request, model_class, serializer_read_class, serializer_write_class ):
+def list(request, model_class, serializer_read_class, serializer_write_class=None ):
+    if serializer_write_class is None:
+        serializer_write_class = serializer_read_class
 
     if request.method == 'GET':
         list = model_class.objects.all()

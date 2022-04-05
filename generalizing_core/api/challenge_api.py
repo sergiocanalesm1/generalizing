@@ -12,4 +12,4 @@ def challenge_list(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def challenge_detail(request, uuid):
-    return detail( request, uuid, Challenge, ChallengeReadSerializer )
+    return detail( request, uuid, Challenge, ChallengeWriteSerializer )
