@@ -4,36 +4,37 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 if os.environ.get('DEBUG') is None:
     import environ
     env = environ.Env()
     environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
     DEBUG = True
     SECRET_KEY = env('SECRET_KEY')
-    default = {
-        'ENGINE': env('ENGINE'),
-        'NAME': env('NAME'),
-        'USER': env('USER'),
-        'PASSWORD': env('PASSWORD'),
-        'HOST': env('HOST'),
-        'PORT': env('PORT'),
+
+    DATABASES = {
+        'default' : {
+            'ENGINE': env('ENGINE'),
+            'NAME': env('NAME'),
+            'USER': env('USER'),
+            'PASSWORD': env('PASSWORD'),
+            'HOST': env('HOST'),
+            'PORT': env('PORT'),
+        } 
     }
+    
     AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
 
 else:
+    import dj_database_url
+
     DEBUG = os.environ.get('DEBUG') != 'False'
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    default = {
-        'ENGINE': os.environ.get('ENGINE'),
-        'NAME': os.environ.get('NAME'),
-        'USER': os.environ.get('USER'),
-        'PASSWORD': os.environ.get('PASSWORD'),
-        'HOST': os.environ.get('HOST'),
-        'PORT': os.environ.get('PORT'),
-    }
+
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
@@ -92,28 +93,11 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = 'generalizing_bo.wsgi.application'
-
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-
-DATABASES = {
-    'default': default
-}
-
-if not DEBUG:
-    import dj_database_url
-    db_from_env = dj_database_url.config(conn_max_age=600)
-    DATABASES['default'].update(db_from_env)
+    
 
 
 AUTH_USER_MODEL = 'generalizing_core.User'
 
-
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -131,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -142,13 +125,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-#STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
