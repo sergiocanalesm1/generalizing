@@ -11,7 +11,7 @@ from generalizing_core.api.common.protocols import detail,list
 
 @api_view(['GET', 'POST'])
 def lfile_list(request):
-    return list(request,LessonFile,LessonFileSerializer,LessonFileSerializer)
+    return list(request,LessonFile,LessonFileSerializer)
 
 @api_view(['GET'])
 def lesson_file_list(request, uuid):
@@ -29,7 +29,7 @@ def relation_file_list(request, uuid):
 
 @api_view(['GET', 'POST'])
 def rfile_list(request):
-    return list(request,RelationFile,RelationFileSerializer,RelationFileSerializer)
+    return list(request,RelationFile,RelationFileSerializer)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def lesson_file_detail(request, uuid):
