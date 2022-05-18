@@ -3,8 +3,7 @@ import os
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-if os.environ.get('DEBUG') is None:
+if os.environ.get('DEBUG') is None :
     import environ
     env = environ.Env()
     environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -21,7 +20,7 @@ if os.environ.get('DEBUG') is None:
             'PORT': env('PORT'),
         } 
     }
-    
+
     AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
@@ -38,7 +37,6 @@ else:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-
 
 
 
