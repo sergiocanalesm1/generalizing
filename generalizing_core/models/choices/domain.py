@@ -26,4 +26,5 @@ class Domain(models.TextChoices):
     PSYCOLOGY = 'Psychology'
     SPORTS = 'Sports'
     NEUROSCIENCE = 'Neuroscience'
+    AGRICULTURE = 'Agriculture'
     OTHER = 'Other'
