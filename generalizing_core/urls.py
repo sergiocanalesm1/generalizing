@@ -35,4 +35,6 @@ urlpatterns = [
     path('relations/<uuid>/files', relation_file_list, name='relation_file_list'),
     path('rfiles/', rfile_list, name='rfile_list'),
     path('rfiles/<uuid>', relation_file_detail, name='relation_file_detail'),
+
+    path('tags/', tags_list, name='tags_list')
 ]
