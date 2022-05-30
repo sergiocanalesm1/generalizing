@@ -39,7 +39,6 @@ else:
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
