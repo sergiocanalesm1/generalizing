@@ -27,6 +27,12 @@ class Lesson(IdentityMixin):
         null=False
     )
 
+    isDescriptionRaw = models.BooleanField(
+        verbose_name='is Description Raw',
+        blank=True,
+        null=True
+    )
+
     origin = models.CharField(
         max_length=100,
         verbose_name='Origin',
