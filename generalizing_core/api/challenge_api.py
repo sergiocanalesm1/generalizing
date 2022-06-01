@@ -16,7 +16,11 @@ def challenge_list(request):
         return list( request, Challenge, ChallengeReadSerializer, ChallengeWriteSerializer )
 
     elif request.method == 'POST':
+        #check if last challenge has a minimum of 3 relations created
+        if Challenge.objects.last().relation_set.count() < 3:
+            return Response(data="A minimum of 3 relations must be created", status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+        #create challenge
         created_challenges = Challenge.objects.all()
         lesson_tuples = get_challenges_lesson_tuples( created_challenges )
         existing_lessons = Lesson.objects.all()

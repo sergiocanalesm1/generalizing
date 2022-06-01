@@ -29,3 +29,4 @@ class Challenge(IdentityMixin):
         verbose_name='Challenge'
         verbose_name_plural='Challenges'
         db_table='challenges'
+        #todo add constraint of unique together: lessons
