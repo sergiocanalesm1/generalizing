@@ -28,7 +28,8 @@ def lesson_list(request):
 def lesson_detail(request, uuid):
     if request.data and 'tags' in request.data:
         request.data['tags'] = handle_tags(request.data['tags'])
-    return detail(request,uuid,Lesson,LessonReadSerializer)
+    #return detail(request,uuid,Lesson,LessonWriteSerializer, LessonReadSerializer)
+    return detail(request,uuid,Lesson,LessonWriteSerializer)
 
 @api_view(['GET'])
 def lesson_user_list(request, uuid):

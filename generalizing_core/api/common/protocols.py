@@ -4,7 +4,9 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-def list(request, model_class, serializer_read_class, serializer_write_class ):
+def list(request, model_class, serializer_read_class, serializer_write_class=None ):
+    if serializer_write_class is None:
+        serializer_write_class = serializer_read_class
 
     if request.method == 'GET':
         list = model_class.objects.all()
@@ -19,16 +21,17 @@ def list(request, model_class, serializer_read_class, serializer_write_class ):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def detail(request, uuid, model_class, serializer_class):
+#def detail(request, uuid, model_class, serializer_write_class, serializer_read_class=None):
+def detail(request, uuid, model_class, serializer_write_class):
 
     model = get_object_or_404(model_class, uuid=uuid)
 
     if request.method == 'GET':
-        serializer = serializer_class(model)
+        serializer = serializer_write_class(model)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = serializer_class(model, data=request.data,context={'request':request}, partial=True)
+        serializer = serializer_write_class(model, data=request.data,context={'request':request}, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

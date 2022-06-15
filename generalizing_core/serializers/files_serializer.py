@@ -1,4 +1,3 @@
-from generalizing_core.models.lesson import Lesson
 from rest_framework import serializers
 
 from generalizing_core.models.file import LessonFile, RelationFile

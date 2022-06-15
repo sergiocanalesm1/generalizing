@@ -34,6 +34,12 @@ class Relation(IdentityMixin):
         verbose_name='Explanation',
     )
 
+    isExplanationRaw = models.BooleanField(
+        verbose_name='is Explanation Raw',
+        blank=True,
+        null=True
+    )
+
     type = models.CharField(
         max_length=50,
         verbose_name='Type',

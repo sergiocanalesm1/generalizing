@@ -10,7 +10,7 @@ from generalizing_core.api.common.protocols import detail,list
 
 @api_view(['GET', 'POST'])
 def user_list(request):
-    return list(request,User,UserSerializer,UserSerializer)#fix
+    return list(request,User,UserSerializer)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])

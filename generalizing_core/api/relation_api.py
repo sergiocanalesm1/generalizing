@@ -15,7 +15,7 @@ def relation_list(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def relation_detail(request, uuid):
-    return detail(request,uuid,Relation,RelationReadSerializer)
+    return detail(request,uuid,Relation,RelationWriteSerializer)
 
 
 @api_view(['GET'])
